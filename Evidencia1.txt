@@ -1,0 +1,62 @@
+﻿/ Evidencia 1: Reporte técnico final
+/ Programa que entregue la media estadística de 10 datos en el puerto de salida de MARIE.
+/ Equipo 9
+/ Diego Morales
+/ Karen Corona
+/ Fernanda Díaz
+
+/ Organizamos a partir de la dirección 100
+ORG 100
+
+/ Ciclo para introducir los 10 datos
+Ciclo,	Input / Recibir dato
+        StoreI DirArray / Guardar el valor del dato en la posición actual del array
+        Load Suma / Cargar la suma 
+        AddI DirArray / Agregar el dato que está en la posición actual del array
+        / al acumulador de suma
+        Store Suma / Guardar la suma
+        Load DirArray / Cargar la posición del arreglo
+        Add One / Agregar 1 a la posición del arreglo
+        Store DirArray / Guardar la posición
+		
+/ Contador para condicionar el ciclo        
+		Load Contador / Cargar el contador, nos ayuda a detener la entrada de datos
+        Subt One / Restar 1 al contador
+        Store Contador / Guardar el valor del contador
+        Skipcond 400 / Detener el ciclo cuando el contador llegue a 0
+        Jump Ciclo / Repetir el ciclo
+        
+Promedio,	Load Suma / Cargar la suma (dividendo)
+			Subt Ten / Restar 10 a la suma (divisor)
+            Store Suma / Guardar el valor de la suma
+            Load Restas / Cargar restas (el cociente de la "división")
+            Add One / Agregar 1 cada que se haga una resta
+            Store Restas / Guardar el valor de restas 
+            Load Suma / Cargar la suma
+            Skipcond 000 / Si la suma/dividendo es negativa, detener el ciclo
+            Jump Promedio / Repetir el ciclo
+            
+Result,		Load Restas / Cargar restas (cociente)
+			Subt One / Restar 1 para truncar decimales
+            Store Restas / Guardar el valor de restas
+            Load Restas / Cargar restas
+			Output / Mostrar en Output log
+            Halt / Detener
+
+/ Variables
+Restas, DEC 0 / Cociente de la división para el promedio
+Suma, 	DEC 0 / Dividendo de la división para el promedio
+Ten,	DEC 10 / Divisor de la división para el promedio
+One,	DEC 1 / Uno (usos múltiples)
+Contador,	DEC 10 / Contador para la entrada de datos (10 datos)
+DirArray,	ADR Array / Dirección de memoria del arreglo
+Array,	DEC 0 / Arreglo de 10 datos
+		DEC 0
+        DEC 0
+        DEC 0
+        DEC 0
+        DEC 0
+        DEC 0
+        DEC 0
+        DEC 0
+        DEC 0
